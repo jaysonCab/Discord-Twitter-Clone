@@ -10,9 +10,15 @@ router.get('/', async (req, res) => { //When make request, always takes 2 variab
   res.json(allPosts);
 });
 
+router.get('/byId/:id', async (req, res) => {
+  const id = req.params.id;
+  const post = await Posts.findByPk(id); //Find by primary key
+  res.json(post);
+})
+
 router.post("/", async (req, res) => {
   const post = req.body;
-  await Posts.create(post);
+  await Posts.create(post);    //This appends the post into SQL workbench table
   res.json(post);
 });
 

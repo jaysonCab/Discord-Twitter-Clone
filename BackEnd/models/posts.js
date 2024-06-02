@@ -16,5 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  return Posts
-}
+  Posts.associate = (models) => {  //Creates association with comments table
+    Posts.hasMany(models.Comments, {
+      onDelete: "cascade", //If post is deleted, comments related or 'cascaded' from will be deleted
+    });
+  };
+
+  return Posts;
+};
+
